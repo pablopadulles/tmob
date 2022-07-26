@@ -15,7 +15,10 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from redirect import views as redirect
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('add/redirec/', redirect.add),
+    path('update/redirec/<int:id>', redirect.update),
 ]
