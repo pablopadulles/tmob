@@ -7,3 +7,4 @@ class Redirect(models.Model):
     active = models.BooleanField(default=True)
     update_at = models.DateTimeField()
     created_at = models.DateTimeField()
+
