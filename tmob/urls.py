@@ -19,6 +19,6 @@ from redirect import views as redirect
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('add/redirec/', redirect.add),
-    path('update/redirec/<int:id>', redirect.update),
+    path('add/redirect/', redirect.add),
+    path('update/redirect/<int:id>', redirect.update),
 ]
