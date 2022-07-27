@@ -3,9 +3,11 @@ from django.http import HttpResponse, JsonResponse
 from .models import Redirect
 from datetime import datetime
 from django.views.decorators.csrf import csrf_exempt
+from django.core.cache import cache
+
 
 @csrf_exempt
-def add(request):
+def add(request) -> JsonResponse:
     if request.method == 'POST':
         print(request.POST)
         url = request.POST['url']
@@ -16,12 +18,15 @@ def add(request):
         return JsonResponse({'status':'ok'})
 
 @csrf_exempt
-def update(request, id):
+def update(request, id) -> JsonResponse:
     if request.method == 'POST':
         redirect = Redirect.objects.get(id=id)
-        redirect.url = request.POST['url']
-        redirect.key = request.POST['key']
-        redirect.active = request.POST['active']
+        if request.POST.get('url', False):
+            redirect.url = request.POST['url']
+        if request.POST.get('active', False):
+            redirect.active = request.POST['active']
+        if request.POST.get('key', False):
+            redirect.key = request.POST['key']
         redirect.update_at = datetime.now()
         redirect.save()
         return JsonResponse({'status':'ok'})
