@@ -30,3 +30,12 @@ def update(request, id) -> JsonResponse:
         redirect.update_at = datetime.now()
         redirect.save()
         return JsonResponse({'status':'ok'})
+
+@csrf_exempt
+def get(request, key) -> JsonResponse:
+    if request.method == 'GET':
+        record = cache.get(key)
+        if record:
+            record['key'] = key
+            return JsonResponse(record)
+    return JsonResponse({})

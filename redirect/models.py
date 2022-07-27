@@ -13,6 +13,6 @@ class Redirect(models.Model):
 
 @receiver(signals.post_save, sender=Redirect)
 def create_redirec(sender, instance, created, **kwargs) -> None:
-    redirect = Redirect.objects.filter(active=True).values()
-    for redi in redirect:
-        cache.set(redi.get('id'), {'key':redi.get('key'), 'url':redi.get('url')})
+    # redirect = Redirect.objects.filter(active=True).values()
+    if instance.active:
+        cache.set(instance.key, {'url':instance.url}, 30)
