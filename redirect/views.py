@@ -32,7 +32,7 @@ def update(request, id) -> JsonResponse:
         return JsonResponse({'status':'ok'})
 
 @csrf_exempt
-def get(request, key) -> JsonResponse:
+def get_redirect(request, key) -> JsonResponse:
     if request.method == 'GET':
         record = cache.get(key)
         if record:
