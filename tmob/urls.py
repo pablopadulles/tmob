@@ -21,4 +21,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('add/redirect/', redirect.add),
     path('update/redirect/<int:id>', redirect.update),
+    path('get/redirect/<str:key>', redirect.get),
 ]
